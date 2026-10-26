@@ -19,6 +19,7 @@ modules:
 
   - type: dnf
     repos:
+      nonfree: rpmfusion
       files:
         - https://raw.githubusercontent.com/terrapkg/packages/f%OS_VERSION%/anda/terra/release/terra.repo
     install:
@@ -46,14 +47,45 @@ modules:
   - type: dnf
     repos:
       files:
-        - https://fedorapeople.org/groups/virt/virtio-win/virtio-win.repo
-        - https://download.opensuse.org/repositories/home:mkittler/Fedora_%OS_VERSION%/home:mkittler.repo
-        - https://raw.githubusercontent.com/albersonmiranda/r_tools_ppa/refs/heads/main/rpm/x86_64/repo.txt
         - https://www.scootersoftware.com/scootersoftware.repo
-      nonfree: rpmfusion
+    install:
+      packages:
+        - bcompare
+
+  - type: dnf
+    repos:
+      files:
+        - https://download.opensuse.org/repositories/home:mkittler/Fedora_%OS_VERSION%/home:mkittler.repo
+    install:
+      packages:
+        - syncthingtray-qt6
+        - syncthingplasmoid-qt6
+        - syncthingfileitemaction-qt6
+        - syncthingctl-qt6
+
+  - type: dnf
+    repos:
+      files:
+        - https://raw.githubusercontent.com/albersonmiranda/r_tools_ppa/refs/heads/main/rpm/x86_64/repo.txt
+    install:
+      packages:
+        - rstudio
+
+  - type: dnf
+    repos:
       copr:
         - cuteneko/waydroid-helper
-      # - faugus/faugus-launcher
+    install:
+      packages:
+        - waydroid-helper
+
+  - type: dnf
+    repos:
+      files:
+        - https://fedorapeople.org/groups/virt/virtio-win/virtio-win.repo
+      nonfree: rpmfusion
+    # copr:
+    #   - faugus/faugus-launcher
     remove:
       packages:
         - Sunshine
@@ -75,15 +107,6 @@ modules:
         - coolercontrol
         - coolercontrold
         - waydroid
-        - waydroid-helper
-
-        - syncthingtray-qt6
-        - syncthingplasmoid-qt6
-        - syncthingfileitemaction-qt6
-        - syncthingctl-qt6
-
-        - bcompare
-        - rstudio
         - nohang-nightly
 
         - gsmartcontrol
@@ -121,8 +144,6 @@ modules:
     repos:
       disable:
         - virtio-win-stable
-        - virtio-win-latest
-        - virtio-win-source
         - home_mkittler
         - scootersoftware
         - r_tools_ppa
