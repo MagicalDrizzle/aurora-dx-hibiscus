@@ -47,3 +47,4 @@ jobs:
           # use cache so less rebuilds
           use_cache: true
           chunkah: true
+          max_layers: 256
