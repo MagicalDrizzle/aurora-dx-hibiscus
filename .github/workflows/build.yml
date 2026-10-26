@@ -46,3 +46,4 @@ jobs:
           maximize_build_space: true
           # use cache so less rebuilds
           use_cache: true
+          chunkah: true
