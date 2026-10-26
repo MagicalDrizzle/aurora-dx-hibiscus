@@ -1,0 +1,9 @@
+{
+  "settings": [
+    {
+      "provider": "myaddr",
+      "domain": "your-name.myaddr.tools",
+      "key": "key"
+    }
+  ]
+}

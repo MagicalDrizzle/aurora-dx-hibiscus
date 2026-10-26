@@ -3,10 +3,10 @@
 # image will be published to ghcr.io/<user>/<name>
 name: aurora-dx-hibiscus
 # description will be included in the image's metadata
-description: This is my personal OS image.
+description: Mizuki's personal aurora-dx-based image <3
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/silverblue-main
+base-image: ghcr.io/ublue-os/aurora-dx
 image-version: latest # You can pin to a specific version of Fedora as well
 
 # module configuration, executed in order
@@ -19,27 +19,150 @@ modules:
 
   - type: dnf
     repos:
-      copr:
-        - atim/starship
+      files:
+        - https://raw.githubusercontent.com/terrapkg/packages/f%OS_VERSION%/anda/terra/release/terra.repo
+    install:
+      no-gpgchecks: true
+      packages:
+        - terra-release
+        - terra-release-extras
+        - terra-release-mesa
+
+  - type: dnf
     install:
       packages:
-        - micro
-        - starship
+        - terra-gpg-keys
+        - adoptium-temurin-java-repository
+
+  - type: dnf-fork
+    source: local
+    repos:
+      enable:
+        - adoptium-temurin-java-repository
+        - terra
+        - terra-extras
+        - terra-mesa
+
+  - type: dnf
+    repos:
+      files:
+        - https://fedorapeople.org/groups/virt/virtio-win/virtio-win.repo
+        - https://download.opensuse.org/repositories/home:mkittler/Fedora_%OS_VERSION%/home:mkittler.repo
+        - https://raw.githubusercontent.com/albersonmiranda/r_tools_ppa/refs/heads/main/rpm/x86_64/repo.txt
+        - https://www.scootersoftware.com/scootersoftware.repo
+      nonfree: rpmfusion
+      copr:
+        - cuteneko/waydroid-helper
+      # - faugus/faugus-launcher
     remove:
       packages:
-        # example: removing firefox (in favor of the flatpak)
-        # "firefox" is the main package, "firefox-langpacks" is a dependency
-        - firefox
-        - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
+        - Sunshine
+    replace:
+      - from-repo: terra-extras
+        packages:
+          - old: ddcutil
+            new: terra-ddcutil
+    install:
+      packages:
+        - gamescope
+        - scopebuddy
+      # - faugus-launcher
 
-  - type: default-flatpaks
-    configurations:
-      - notify: true # Send notification after install/uninstall is finished (true/false)
-        scope: system
-        # If no repo information is specified, Flathub will be used by default
-        install: # system flatpaks we want all users to have and not remove
-          - org.mozilla.firefox
-          - org.gnome.Loupe
-      - scope: user # Also add Flathub user repo, but no user packages
+        - temurin-25-jdk
+        - micro
+        - python-proton-vpn-cli
+        - proton-vpn-qt-app
+        - coolercontrol
+        - coolercontrold
+        - waydroid
+        - waydroid-helper
+
+        - syncthingtray-qt6
+        - syncthingplasmoid-qt6
+        - syncthingfileitemaction-qt6
+        - syncthingctl-qt6
+
+        - bcompare
+        - rstudio
+        - nohang-nightly
+
+        - gsmartcontrol
+        - btrfs-heatmap
+        - btrfsmaintenance
+        - mmc-utils
+        - cmospwd
+        - byebyebios
+        - efivar
+        - pesign
+        - sbsigntools
+        - smbios-utils
+        - coreboot-utils-all
+        - usbview
+        - playerctl
+        - gparted
+        - golly
+        - ucblogo
+        - vkmark
+        - below
+        - firejail
+        - hardinfo2
+        - lxqt-admin
+        - pcmanfm-qt
+        - zswap-cli
+        - qt5ct
+        - qt6ct
+        - accessibility-inspector
+        - android-udev-rules
+        - chkconfig
+        - cpuinfo
+
+  - type: dnf-fork
+    source: local
+    repos:
+      disable:
+        - virtio-win-stable
+        - virtio-win-latest
+        - virtio-win-source
+        - home_mkittler
+        - scootersoftware
+        - r_tools_ppa
+      # - copr:copr.fedorainfracloud.org:faugus:faugus-launcher
+
+  - type: script
+    scripts:
+    # - bcompare.sh # beyondcompare keygen, kept as a backup
+      - customization.sh
+
+  - type: script
+    secrets:
+      - type: env
+        name: SB_KEY
+        mount:
+          type: file
+          destination: /tmp/SB_KEY
+      - type: env
+        name: SB_CERT
+        mount:
+          type: file
+          destination: /tmp/SB_CERT
+      - type: env
+        name: GH_TOKEN
+        mount:
+          type: env
+          name: GH_TOKEN
+    scripts:
+      - hermes.sh # Install Hermes and Hermes-KMS
+
+  - type: systemd
+    system:
+      masked:
+        - systemd-oomd.service
+      enabled:
+        - coolercontrold.service
+        - nohang-desktop.service
+        - podman.socket
+    user:
+      enabled:
+        - hermes.service
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
