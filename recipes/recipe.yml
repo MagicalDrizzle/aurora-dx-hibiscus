@@ -35,15 +35,6 @@ modules:
         - terra-gpg-keys
         - adoptium-temurin-java-repository
 
-  - type: dnf-fork
-    source: local
-    repos:
-      enable:
-        - adoptium-temurin-java-repository
-        - terra
-        - terra-extras
-        - terra-mesa
-
   - type: dnf
     repos:
       files:
@@ -80,10 +71,21 @@ modules:
         - waydroid-helper
 
   - type: dnf
+    source: local
     repos:
       files:
         - https://fedorapeople.org/groups/virt/virtio-win/virtio-win.repo
-      nonfree: rpmfusion
+      enable:
+        - adoptium-temurin-java-repository
+        - terra
+        - terra-extras
+        - terra-mesa
+      disable:
+        - virtio-win-stable
+        - home_mkittler
+        - scootersoftware
+        - r_tools_ppa
+      # - copr:copr.fedorainfracloud.org:faugus:faugus-launcher
     # copr:
     #   - faugus/faugus-launcher
     remove:
@@ -139,16 +141,6 @@ modules:
         - chkconfig
         - cpuinfo
 
-  - type: dnf-fork
-    source: local
-    repos:
-      disable:
-        - virtio-win-stable
-        - home_mkittler
-        - scootersoftware
-        - r_tools_ppa
-      # - copr:copr.fedorainfracloud.org:faugus:faugus-launcher
-
   - type: script
     scripts:
     # - bcompare.sh # beyondcompare keygen, kept as a backup
@@ -176,7 +168,7 @@ modules:
 
   - type: systemd
     system:
-      masked:
+      disabled:
         - systemd-oomd.service
       enabled:
         - coolercontrold.service
