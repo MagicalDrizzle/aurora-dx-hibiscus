@@ -65,7 +65,8 @@ modules:
   - type: dnf
     source: local
     repos:
-      disable: terra
+      disable:
+        - terra
       copr:
         - cuteneko/waydroid-helper
     install:
