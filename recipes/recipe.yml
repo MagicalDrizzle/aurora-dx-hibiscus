@@ -63,7 +63,9 @@ modules:
         - rstudio
 
   - type: dnf
+    source: local
     repos:
+      disable: terra
       copr:
         - cuteneko/waydroid-helper
     install:
