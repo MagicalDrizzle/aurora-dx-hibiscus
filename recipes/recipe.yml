@@ -63,6 +63,7 @@ modules:
         - rstudio
 
   - type: dnf
+    source: local
     repos:
       disable:
         - terra
@@ -73,6 +74,7 @@ modules:
         - waydroid-helper
 
   - type: dnf
+    source: local
     repos:
       files:
         - https://fedorapeople.org/groups/virt/virtio-win/virtio-win.repo
