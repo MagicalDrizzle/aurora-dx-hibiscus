@@ -54,6 +54,17 @@ modules:
         - syncthingfileitemaction-qt6
         - syncthingctl-qt6
 
+
+  - type: dnf
+    repos:
+      keys:
+        - https://repo.ivpn.net/stable/fedora/generic/repo.gpg
+      files:
+        - https://repo.ivpn.net/stable/fedora/generic/ivpn.repo
+    install:
+      packages:
+        - ivpn-ui
+
   - type: dnf
     repos:
       files:
@@ -63,7 +74,6 @@ modules:
         - rstudio
 
   - type: dnf
-    source: local
     repos:
       disable:
         - terra
@@ -74,7 +84,6 @@ modules:
         - waydroid-helper
 
   - type: dnf
-    source: local
     repos:
       files:
         - https://fedorapeople.org/groups/virt/virtio-win/virtio-win.repo
@@ -107,8 +116,6 @@ modules:
 
         - temurin-25-jdk
         - micro
-        - python-proton-vpn-cli
-        - proton-vpn-qt-app
         - coolercontrol
         - coolercontrold
         - waydroid
