@@ -124,6 +124,7 @@ modules:
         - gsmartcontrol
         - btrfs-heatmap
         - btrfsmaintenance
+        - msr-tools
         - mmc-utils
         - cmospwd
         - byebyebios
