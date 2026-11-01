@@ -83,6 +83,14 @@ modules:
       packages:
         - waydroid-helper
 
+# - type: dnf
+#   repos:
+#   copr:
+#   - faugus/faugus-launcher
+#   install:
+#     packages:
+#       - faugus-launcher
+
   - type: dnf
     repos:
       files:
@@ -97,9 +105,9 @@ modules:
         - home_mkittler
         - scootersoftware
         - r_tools_ppa
-      # - copr:copr.fedorainfracloud.org:faugus:faugus-launcher
-    # copr:
-    #   - faugus/faugus-launcher
+#     copr:
+#       disable:
+#         - faugus/faugus-launcher
     remove:
       packages:
         - Sunshine
@@ -112,7 +120,9 @@ modules:
       packages:
         - gamescope
         - scopebuddy
-      # - faugus-launcher
+
+        - python-proton-vpn-cli
+        - proton-vpn-qt-app
 
         - temurin-25-jdk
         - micro
