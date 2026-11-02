@@ -10,9 +10,10 @@ curl_gh() {
 
 # Hermes
 kver="$(rpm -q --queryformat '%{VERSION}-%{RELEASE}.%{ARCH}\n' kernel-core | sort -V | tail -n1)"
-dnf5 -y install "$(curl_gh https://api.github.com/repos/MrOz59/Hermes/releases \
-    | jq -r --arg ver "$OS_VERSION" '[.[0].assets[].browser_download_url] |
-    (map(select(contains(".fc" + $ver))).[0]) // (map(select(contains(".fc"))) | sort[-1])')"
+#dnf5 -y install "$(curl_gh https://api.github.com/repos/MrOz59/Hermes/releases \
+#    | jq -r --arg ver "$OS_VERSION" '[.[0].assets[].browser_download_url] |
+#    (map(select(contains(".fc" + $ver))).[0]) // (map(select(contains(".fc"))) | sort[-1])')"
+dnf5 -y install https://github.com/MrOz59/Hermes/releases/download/october-2026-rc6/hermes-0.6.0+20261031.rc6.d1c8564-1.fc44.x86_64.rpm
 
 # Hermes-KMS
 git clone https://github.com/MrOz59/Hermes-KMS.git --single-branch \
