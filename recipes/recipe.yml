@@ -55,15 +55,15 @@ modules:
         - syncthingctl-qt6
 
 
-  - type: dnf
-    repos:
-      keys:
-        - https://repo.ivpn.net/stable/fedora/generic/repo.gpg
-      files:
-        - https://repo.ivpn.net/stable/fedora/generic/ivpn.repo
-    install:
-      packages:
-        - ivpn-ui
+  # - type: dnf
+  #   repos:
+  #     keys:
+  #       - https://repo.ivpn.net/stable/fedora/generic/repo.gpg
+  #     files:
+  #       - https://repo.ivpn.net/stable/fedora/generic/ivpn.repo
+  #   install:
+  #     packages:
+  #       - ivpn-ui
 
   - type: dnf
     repos:
@@ -131,6 +131,8 @@ modules:
         - waydroid
         - nohang-nightly
 
+        - sbsigntools
+        - sbctl
         - gsmartcontrol
         - btrfs-heatmap
         - btrfsmaintenance
@@ -140,7 +142,6 @@ modules:
         - byebyebios
         - efivar
         - pesign
-        - sbsigntools
         - smbios-utils
         - coreboot-utils-all
         - usbview
