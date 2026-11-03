@@ -17,6 +17,20 @@ modules:
       - source: system
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
+  - type: os-release
+    properties:
+      ID: hibiscus
+      NAME: Hibiscus
+
+  - type: fonts
+    fonts:
+    nerd-fonts:
+      - AtkinsonHyperlegibleMono # don't add spaces or "Nerd Font" suffix
+      - SourceCodePro
+      - CascadiaCode
+      - CascadiaMono
+      - NerdFontsSymbolsOnly
+
   - type: dnf
     repos:
       nonfree: rpmfusion
@@ -53,7 +67,6 @@ modules:
         - syncthingplasmoid-qt6
         - syncthingfileitemaction-qt6
         - syncthingctl-qt6
-
 
   # - type: dnf
   #   repos:
@@ -200,4 +213,5 @@ modules:
       enabled:
         - hermes.service
 
+  - type: initramfs
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
