@@ -159,7 +159,6 @@ modules:
         - coreboot-utils-all
         - usbview
         - playerctl
-        - gparted
         - golly
         - ucblogo
         - vkmark
