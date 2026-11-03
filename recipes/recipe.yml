@@ -24,12 +24,12 @@ modules:
 
   - type: fonts
     fonts:
-    nerd-fonts:
-      - AtkinsonHyperlegibleMono # don't add spaces or "Nerd Font" suffix
-      - SourceCodePro
-      - CascadiaCode
-      - CascadiaMono
-      - NerdFontsSymbolsOnly
+      nerd-fonts:
+        - AtkinsonHyperlegibleMono # don't add spaces or "Nerd Font" suffix
+        - SourceCodePro
+        - CascadiaCode
+        - CascadiaMono
+        - NerdFontsSymbolsOnly
 
   - type: dnf
     repos:
