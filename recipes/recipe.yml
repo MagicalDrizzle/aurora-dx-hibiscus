@@ -96,6 +96,15 @@ modules:
       packages:
         - waydroid-helper
 
+  - type: dnf
+    repos:
+      enable:
+        - adoptium-temurin-java-repository
+    install:
+      skip-unavailable: true
+      packages:
+        - temurin-25-jdk
+
 # - type: dnf
 #   repos:
 #   copr:
@@ -109,7 +118,6 @@ modules:
       files:
         - https://fedorapeople.org/groups/virt/virtio-win/virtio-win.repo
       enable:
-        - adoptium-temurin-java-repository
         - terra
         - terra-extras
         - terra-mesa
@@ -137,7 +145,6 @@ modules:
         - python-proton-vpn-cli
         - proton-vpn-qt-app
 
-        - temurin-25-jdk
         - micro
         - coolercontrol
         - coolercontrold
