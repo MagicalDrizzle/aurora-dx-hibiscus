@@ -141,6 +141,7 @@ modules:
       packages:
         - gamescope
         - scopebuddy
+        - yad
 
         - python-proton-vpn-cli
         - proton-vpn-qt-app
@@ -150,6 +151,7 @@ modules:
         - coolercontrold
         - waydroid
         - nohang-nightly
+        - redpanda-cpp
 
         - sbsigntools
         - sbctl
