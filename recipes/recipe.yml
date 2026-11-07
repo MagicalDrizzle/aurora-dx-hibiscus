@@ -78,13 +78,13 @@ modules:
   #     packages:
   #       - ivpn-ui
 
-  - type: dnf
-    repos:
-      files:
-        - https://raw.githubusercontent.com/albersonmiranda/r_tools_ppa/refs/heads/main/rpm/x86_64/repo.txt
-    install:
-      packages:
-        - rstudio
+  # - type: dnf
+  #   repos:
+  #     files:
+  #       - https://raw.githubusercontent.com/albersonmiranda/r_tools_ppa/refs/heads/main/rpm/x86_64/repo.txt
+  #   install:
+  #     packages:
+  #       - rstudio
 
   - type: dnf
     repos:
@@ -159,29 +159,28 @@ modules:
         - btrfsmaintenance
         - msr-tools
         - mmc-utils
-        - cmospwd
-        - byebyebios
-        - efivar
-        - pesign
-        - smbios-utils
-        - coreboot-utils-all
+#        - cmospwd
+#        - byebyebios
+#        - efivar
+#        - pesign
+#        - smbios-utils
+#        - coreboot-utils-all
         - usbview
         - playerctl
-        - golly
-        - ucblogo
-        - vkmark
-        - below
-        - firejail
-        - hardinfo2
-        - lxqt-admin
-        - pcmanfm-qt
+#        - golly
+#        - ucblogo
+#        - vkmark
+#        - below
+#        - firejail
+#        - hardinfo2
+#        - lxqt-admin
+#        - pcmanfm-qt
         - zswap-cli
         - qt5ct
         - qt6ct
         - accessibility-inspector
         - android-udev-rules
-        - chkconfig
-        - cpuinfo
+#        - cpuinfo
 
   - type: script
     scripts:
