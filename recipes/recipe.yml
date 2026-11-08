@@ -20,7 +20,9 @@ modules:
   - type: os-release
     properties:
       ID: hibiscus
+      ID_LIKE: fedora
       NAME: Hibiscus
+      PRETTY_NAME: Hibiscus
 
   - type: fonts
     fonts:
@@ -49,24 +51,14 @@ modules:
         - terra-gpg-keys
         - adoptium-temurin-java-repository
 
-  - type: dnf
-    repos:
-      files:
-        - https://www.scootersoftware.com/scootersoftware.repo
-    install:
-      packages:
-        - bcompare
+  # - type: dnf
+  #   repos:
+  #     files:
+  #       - https://www.scootersoftware.com/scootersoftware.repo
+  #   install:
+  #     packages:
+  #       - bcompare
 
-  - type: dnf
-    repos:
-      files:
-        - https://download.opensuse.org/repositories/home:mkittler/Fedora_%OS_VERSION%/home:mkittler.repo
-    install:
-      packages:
-        - syncthingtray-qt6
-        - syncthingplasmoid-qt6
-        - syncthingfileitemaction-qt6
-        - syncthingctl-qt6
 
   # - type: dnf
   #   repos:
@@ -86,6 +78,26 @@ modules:
   #     packages:
   #       - rstudio
 
+  # - type: dnf
+  #   repos:
+  #   copr:
+  #   - faugus/faugus-launcher
+  #   install:
+  #     packages:
+  #       - faugus-launcher
+
+
+  - type: dnf
+    repos:
+      files:
+        - https://download.opensuse.org/repositories/home:mkittler/Fedora_%OS_VERSION%/home:mkittler.repo
+    install:
+      packages:
+        - syncthingtray-qt6
+        - syncthingplasmoid-qt6
+        - syncthingfileitemaction-qt6
+        - syncthingctl-qt6
+
   - type: dnf
     repos:
       disable:
@@ -96,22 +108,14 @@ modules:
       packages:
         - waydroid-helper
 
-  # - type: dnf
-  #   repos:
-  #     enable:
-  #       - adoptium-temurin-java-repository
-  #   install:
-  #     skip-unavailable: true
-  #     packages:
-  #       - temurin-25-jdk
-
-# - type: dnf
-#   repos:
-#   copr:
-#   - faugus/faugus-launcher
-#   install:
-#     packages:
-#       - faugus-launcher
+   - type: dnf
+     repos:
+       enable:
+         - adoptium-temurin-java-repository
+     install:
+       skip-unavailable: true
+       packages:
+         - temurin-25-jdk
 
   - type: dnf
     repos:
@@ -124,11 +128,11 @@ modules:
       disable:
         - virtio-win-stable
         - home_mkittler
-        - scootersoftware
-        - r_tools_ppa
-#     copr:
-#       disable:
-#         - faugus/faugus-launcher
+     #    - scootersoftware
+     #    - r_tools_ppa
+     # copr:
+     #   disable:
+     #     - faugus/faugus-launcher
     remove:
       packages:
         - Sunshine
@@ -139,48 +143,52 @@ modules:
             new: terra-ddcutil
     install:
       packages:
+        - micro
+        - firejail
+        - sbsigntools
+        - sbctl
+        - cmospwd
+        - byebyebios
+        - efivar
+        - pesign
+        - smbios-utils
+        - coreboot-utils-all
+        - msr-tools
+        - mmc-utils
+
+        - below
+        - coolercontrol
+        - coolercontrold
+        - btrfs-assistant
+        - btrfsmaintenance
+        - nohang-nightly
+        - zswap-cli
+
         - gamescope
         - scopebuddy
+        - waydroid
 
         - python-proton-vpn-cli
         - proton-vpn-qt-app
 
-        - micro
-        - coolercontrol
-        - coolercontrold
-        - waydroid
-        - nohang-nightly
-        - redpanda-cpp
-
-        - sbsigntools
-        - sbctl
-        - gsmartcontrol
-        - btrfs-heatmap
-        - btrfsmaintenance
-        - msr-tools
-        - mmc-utils
-#        - cmospwd
-#        - byebyebios
-#        - efivar
-#        - pesign
-#        - smbios-utils
-#        - coreboot-utils-all
-        - usbview
-        - playerctl
-#        - golly
-#        - ucblogo
-#        - vkmark
-#        - below
-#        - firejail
-#        - hardinfo2
-#        - lxqt-admin
-#        - pcmanfm-qt
-        - zswap-cli
         - qt5ct
         - qt6ct
-        - accessibility-inspector
+        - lxqt-admin
         - android-udev-rules
-#        - cpuinfo
+
+        - redpanda-cpp
+        - gsmartcontrol
+
+        # - btrfs-heatmap
+        # - pcmanfm-qt
+        # - usbview
+        # - playerctl
+        # - golly
+        # - ucblogo
+        # - vkmark
+        # - hardinfo2
+        # - accessibility-inspector
+        # - cpuinfo
 
   - type: script
     scripts:
