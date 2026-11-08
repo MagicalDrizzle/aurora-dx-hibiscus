@@ -51,13 +51,13 @@ modules:
         - terra-gpg-keys
         - adoptium-temurin-java-repository
 
-  # - type: dnf
-  #   repos:
-  #     files:
-  #       - https://www.scootersoftware.com/scootersoftware.repo
-  #   install:
-  #     packages:
-  #       - bcompare
+  - type: dnf
+    repos:
+      files:
+        - https://www.scootersoftware.com/scootersoftware.repo
+    install:
+      packages:
+        - bcompare
 
 
   # - type: dnf
