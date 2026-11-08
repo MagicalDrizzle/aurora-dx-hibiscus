@@ -22,7 +22,6 @@ modules:
       ID: hibiscus
       ID_LIKE: fedora
       NAME: Hibiscus
-      PRETTY_NAME: Hibiscus
 
   - type: fonts
     fonts:
