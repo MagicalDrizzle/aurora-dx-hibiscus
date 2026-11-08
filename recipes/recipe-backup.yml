@@ -1,0 +1,231 @@
+---
+# yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
+# image will be published to ghcr.io/<user>/<name>
+name: aurora-dx-hibiscus
+# description will be included in the image's metadata
+description: Mizuki's personal aurora-dx-based image <3
+
+# the base image to build on top of (FROM) and the version tag to use
+base-image: ghcr.io/ublue-os/aurora-dx
+image-version: latest # You can pin to a specific version of Fedora as well
+
+# module configuration, executed in order
+# you can include multiple instances of the same module
+modules:
+  - type: files
+    files:
+      - source: system
+        destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
+
+  - type: os-release
+    properties:
+      ID: hibiscus
+      ID_LIKE: fedora
+      NAME: Hibiscus
+      PRETTY_NAME: Hibiscus
+
+  - type: fonts
+    fonts:
+      nerd-fonts:
+        - AtkinsonHyperlegibleMono # don't add spaces or "Nerd Font" suffix
+        - SourceCodePro
+        - CascadiaCode
+        - CascadiaMono
+        - NerdFontsSymbolsOnly
+
+  - type: dnf
+    repos:
+      nonfree: rpmfusion
+      files:
+        - https://raw.githubusercontent.com/terrapkg/packages/f%OS_VERSION%/anda/terra/release/terra.repo
+    install:
+      no-gpgchecks: true
+      packages:
+        - terra-release
+        - terra-release-extras
+        - terra-release-mesa
+
+  - type: dnf
+    install:
+      packages:
+        - terra-gpg-keys
+        - adoptium-temurin-java-repository
+
+  - type: dnf
+    repos:
+      files:
+        - https://www.scootersoftware.com/scootersoftware.repo
+    install:
+      packages:
+        - bcompare
+
+
+  # - type: dnf
+  #   repos:
+  #     keys:
+  #       - https://repo.ivpn.net/stable/fedora/generic/repo.gpg
+  #     files:
+  #       - https://repo.ivpn.net/stable/fedora/generic/ivpn.repo
+  #   install:
+  #     packages:
+  #       - ivpn-ui
+
+  # - type: dnf
+  #   repos:
+  #     files:
+  #       - https://raw.githubusercontent.com/albersonmiranda/r_tools_ppa/refs/heads/main/rpm/x86_64/repo.txt
+  #   install:
+  #     packages:
+  #       - rstudio
+
+  # - type: dnf
+  #   repos:
+  #   copr:
+  #   - faugus/faugus-launcher
+  #   install:
+  #     packages:
+  #       - faugus-launcher
+
+
+  - type: dnf
+    repos:
+      files:
+        - https://download.opensuse.org/repositories/home:mkittler/Fedora_%OS_VERSION%/home:mkittler.repo
+    install:
+      packages:
+        - syncthingtray-qt6
+        - syncthingplasmoid-qt6
+        - syncthingfileitemaction-qt6
+        - syncthingctl-qt6
+
+  - type: dnf
+    repos:
+      disable:
+        - terra
+      copr:
+        - cuteneko/waydroid-helper
+    install:
+      packages:
+        - waydroid-helper
+
+  - type: dnf
+    repos:
+      enable:
+        - adoptium-temurin-java-repository
+    install:
+      skip-unavailable: true
+      packages:
+        - temurin-25-jdk
+
+  - type: dnf
+    repos:
+      files:
+        - https://fedorapeople.org/groups/virt/virtio-win/virtio-win.repo
+      enable:
+        - terra
+        - terra-extras
+        - terra-mesa
+      disable:
+        - virtio-win-stable
+        - home_mkittler
+     #    - scootersoftware
+     #    - r_tools_ppa
+     # copr:
+     #   disable:
+     #     - faugus/faugus-launcher
+    remove:
+      packages:
+        - Sunshine
+    replace:
+      - from-repo: terra-extras
+        packages:
+          - old: ddcutil
+            new: terra-ddcutil
+    install:
+      packages:
+        - micro
+        - firejail
+        - sbsigntools
+        - sbctl
+        - cmospwd
+        - byebyebios
+        - efivar
+        - pesign
+        - smbios-utils
+        - coreboot-utils-all
+        - msr-tools
+        - mmc-utils
+
+        - below
+        - coolercontrol
+        - coolercontrold
+        - btrfs-assistant
+        - btrfsmaintenance
+        - nohang-nightly
+        - zswap-cli
+
+        - gamescope
+        - scopebuddy
+        - waydroid
+
+        - python-proton-vpn-cli
+        - proton-vpn-qt-app
+
+        - qt5ct
+        - qt6ct
+        - lxqt-admin
+        - android-udev-rules
+
+        - redpanda-cpp
+        - gsmartcontrol
+
+        # - btrfs-heatmap
+        # - pcmanfm-qt
+        # - usbview
+        # - playerctl
+        # - golly
+        # - ucblogo
+        # - vkmark
+        # - hardinfo2
+        # - accessibility-inspector
+        # - cpuinfo
+
+  - type: script
+    scripts:
+      - bcompare.sh
+      - customization.sh
+
+  - type: script
+    secrets:
+      - type: env
+        name: SB_KEY
+        mount:
+          type: file
+          destination: /tmp/SB_KEY
+      - type: env
+        name: SB_CERT
+        mount:
+          type: file
+          destination: /tmp/SB_CERT
+      - type: env
+        name: GH_TOKEN
+        mount:
+          type: env
+          name: GH_TOKEN
+    scripts:
+      - hermes.sh # Install Hermes and Hermes-KMS
+
+  - type: systemd
+    system:
+      disabled:
+        - systemd-oomd.service
+      enabled:
+        - coolercontrold.service
+        - nohang-desktop.service
+        - podman.socket
+    user:
+      enabled:
+        - hermes.service
+
+  - type: initramfs
+  - type: signing # this sets up the proper policy & signing files for signed images to work fully
