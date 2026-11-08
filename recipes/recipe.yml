@@ -192,8 +192,7 @@ modules:
 
   - type: script
     scripts:
-    # - bcompare.sh # beyondcompare keygen, kept as a backup
-    # - aifilesorter.sh
+      - bcompare.sh
       - customization.sh
 
   - type: script
