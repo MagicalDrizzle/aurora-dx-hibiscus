@@ -108,14 +108,14 @@ modules:
       packages:
         - waydroid-helper
 
-   - type: dnf
-     repos:
-       enable:
-         - adoptium-temurin-java-repository
-     install:
-       skip-unavailable: true
-       packages:
-         - temurin-25-jdk
+  - type: dnf
+    repos:
+      enable:
+        - adoptium-temurin-java-repository
+    install:
+      skip-unavailable: true
+      packages:
+        - temurin-25-jdk
 
   - type: dnf
     repos:
