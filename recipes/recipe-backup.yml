@@ -128,7 +128,7 @@ modules:
       disable:
         - virtio-win-stable
         - home_mkittler
-     #    - scootersoftware
+        - scootersoftware
      #    - r_tools_ppa
      # copr:
      #   disable:
