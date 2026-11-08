@@ -140,7 +140,7 @@ modules:
 
         - qt5ct
         - qt6ct
-        - lxqt-admin
+        - lxqt-admin # Users and Groups
         - android-udev-rules
 
         - redpanda-cpp
