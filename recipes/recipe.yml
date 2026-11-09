@@ -103,11 +103,6 @@ modules:
     remove:
       packages:
         - Sunshine
-    replace:
-      - from-repo: terra-extras
-        packages:
-          - old: ddcutil
-            new: terra-ddcutil
     install:
       packages:
         - micro
