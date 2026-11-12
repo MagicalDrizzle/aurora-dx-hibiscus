@@ -118,6 +118,7 @@ modules:
         - msr-tools
         - mmc-utils
 
+        - bees
         - below
         - coolercontrol
         - coolercontrold
@@ -170,6 +171,7 @@ modules:
     system:
       disabled:
         - systemd-oomd.service
+        - waydroid-container.service
       enabled:
         - coolercontrold.service
         - nohang-desktop.service
