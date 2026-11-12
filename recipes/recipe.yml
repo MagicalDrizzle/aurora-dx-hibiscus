@@ -146,6 +146,7 @@ modules:
     scripts:
       - bcompare.sh
       - customization.sh
+      - bazzite.sh
 
   - type: script
     secrets:
