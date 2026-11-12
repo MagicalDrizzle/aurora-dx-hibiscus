@@ -126,6 +126,7 @@ modules:
         - btrfsmaintenance
         - nohang-nightly
         - zswap-cli
+        - python3-pip
 
         - gamescope
         - scopebuddy
