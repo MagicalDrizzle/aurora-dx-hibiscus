@@ -21,6 +21,8 @@ rsync -Rr system_files/desktop/shared/./etc/systemd/system/beesd@.service.d/over
           system_files/desktop/shared/./usr/lib/systemd/system/beesd@.timer \
           system_files/desktop/shared/./usr/share/ublue-os/just/82-bazzite-beesd.just \
           /
+echo "import? \"/usr/share/ublue-os/just/82-bazzite-beesd.just\"" >> /usr/share/ublue-os/just/00-entry.just
+sed -i -e '/source \/usr\/lib\/ujust\/ujust.sh/d' -e 's/ugum/gum/g' /usr/share/ublue-os/just/82-bazzite-beesd.just
 
 # btrfs-assistant: Match the literal runtime variable in the launcher.
 # shellcheck disable=SC2016
@@ -55,3 +57,5 @@ rsync -Rr system_files/desktop/shared/./usr/bin/waydroid-launcher \
           system_files/desktop/shared/./usr/share/polkit-1/rules.d/30-waydroid.rules \
           system_files/desktop/shared/./usr/share/ublue-os/just/82-bazzite-waydroid.just \
           /
+echo "import? \"/usr/share/ublue-os/just/82-bazzite-waydroid.just\"" >> /usr/share/ublue-os/just/00-entry.just
+sed -i -e '/source \/usr\/lib\/ujust\/ujust.sh/d' -e 's/ugum/gum/g' /usr/share/ublue-os/just/82-bazzite-waydroid.just
