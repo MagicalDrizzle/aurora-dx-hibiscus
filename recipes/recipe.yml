@@ -35,8 +35,8 @@ modules:
   - type: dnf
     repos:
       nonfree: rpmfusion
-      files:
-        - https://raw.githubusercontent.com/terrapkg/packages/f%OS_VERSION%/anda/terra/release/terra.repo
+      enable:
+        - terra
     install:
       no-gpgchecks: true
       packages:
