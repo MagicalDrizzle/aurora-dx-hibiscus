@@ -23,14 +23,13 @@ modules:
       ID_LIKE: fedora
       NAME: Hibiscus
 
-  - type: fonts
-    fonts:
-      nerd-fonts:
-        - AtkinsonHyperlegibleMono # don't add spaces or "Nerd Font" suffix
-        - SourceCodePro
-        - CascadiaCode
-        - CascadiaMono
-        - NerdFontsSymbolsOnly
+  # - type: fonts
+  #   fonts:
+  #     nerd-fonts:
+  #       - AtkinsonHyperlegibleMono # don't add spaces or "Nerd Font" suffix
+  #       - SourceCodePro
+  #       - CascadiaCode
+  #       - CascadiaMono
 
   - type: dnf
     repos:
@@ -38,17 +37,24 @@ modules:
       enable:
         - terra
     install:
-      no-gpgchecks: true
       packages:
         - terra-release
         - terra-release-extras
         - terra-release-mesa
-
-  - type: dnf
-    install:
-      packages:
         - terra-gpg-keys
         - adoptium-temurin-java-repository
+
+  - type: dnf
+    repos:
+      enable:
+        - terra
+    install:
+      packages:
+        - atkinsonhyperlegiblemono-nerd-fonts
+        - cascadiacode-nerd-fonts
+        - cascadiamono-nerd-fonts
+        - sourcecodepro-nerd-fonts
+        # - nerdfontssymbolsonly-nerd-fonts # included in aurora
 
   - type: dnf
     repos:
