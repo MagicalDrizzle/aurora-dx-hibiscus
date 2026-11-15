@@ -14,12 +14,12 @@ rsync -Rr system_files/desktop/shared/./etc/systemd/system/beesd@.service.d/over
           system_files/desktop/shared/./usr/lib/systemd/system/beesd@.timer \
           system_files/desktop/shared/./usr/share/ublue-os/just/82-bazzite-beesd.just \
           /
+sed -i 's/\[group("system")\]/\[group("System")\]/g' /usr/share/ublue-os/just/82-bazzite-beesd.just
 echo "import? \"/usr/share/ublue-os/just/82-bazzite-beesd.just\"" >> /usr/share/ublue-os/just/00-entry.just
 
 ### btrfs-assistant: Match the literal runtime variable in the launcher.
 # shellcheck disable=SC2016
-sed -i 's/ --xdg-runtime=\\"${XDG_RUNTIME_DIR}\\"//g' \
-       /usr/bin/btrfs-assistant-launcher
+sed -i 's/ --xdg-runtime=\\"${XDG_RUNTIME_DIR}\\"//g' /usr/bin/btrfs-assistant-launcher
 
 ### DXVK
 curl "https://raw.githubusercontent.com/doitsujin/dxvk/3a4c6fa3cb1548d56a90a38dd8f526b6c13e63fd/dxvk.conf" \
@@ -37,7 +37,7 @@ sed -i~ -E \
 
 if [[ -f "/var/lib/waydroid/lxc/waydroid/config" ]]; then
   echo "Removing unneeded apparmor entry from Waydroid LXC"
-  sed -i '/lxc\.apparmor\.profile\s*=\s*unconfined/d' "/var/lib/waydroid/lxc/waydroid/config"
+  sed -i '/lxc\.apparmor\.profile\s*=\s*unconfined/d' /var/lib/waydroid/lxc/waydroid/config
 fi
 
 rsync -Rr system_files/desktop/shared/./usr/bin/waydroid-launcher \
@@ -48,4 +48,5 @@ rsync -Rr system_files/desktop/shared/./usr/bin/waydroid-launcher \
           system_files/desktop/shared/./usr/share/polkit-1/rules.d/30-waydroid.rules \
           system_files/desktop/shared/./usr/share/ublue-os/just/82-bazzite-waydroid.just \
           /
+sed -i 's/\[group("apps")\]/\[group("Apps")\]/g' /usr/share/ublue-os/just/82-bazzite-waydroid.just
 echo "import? \"/usr/share/ublue-os/just/82-bazzite-waydroid.just\"" >> /usr/share/ublue-os/just/00-entry.just
