@@ -9,14 +9,6 @@ mkdir -p /usr/lib/ujust && cp packages/ublue-os-just/src/lib-ujust/* /usr/lib/uj
 git clone https://github.com/ublue-os/bazzite.git /tmp/bazzite && cd /tmp/bazzite
 git checkout $(git tag | grep -Ex '[^a-z]+' | tail -n1)
 
-### bees
-rsync -Rr system_files/desktop/shared/./etc/systemd/system/beesd@.service.d/override.conf \
-          system_files/desktop/shared/./usr/lib/systemd/system/beesd@.timer \
-          system_files/desktop/shared/./usr/share/ublue-os/just/82-bazzite-beesd.just \
-          /
-sed -i 's/\[group("system")\]/\[group("System")\]/g' /usr/share/ublue-os/just/82-bazzite-beesd.just
-echo "import? \"/usr/share/ublue-os/just/82-bazzite-beesd.just\"" >> /usr/share/ublue-os/just/00-entry.just
-
 ### btrfs-assistant: Match the literal runtime variable in the launcher.
 # shellcheck disable=SC2016
 sed -i 's/ --xdg-runtime=\\"${XDG_RUNTIME_DIR}\\"//g' /usr/bin/btrfs-assistant-launcher
@@ -24,6 +16,15 @@ sed -i 's/ --xdg-runtime=\\"${XDG_RUNTIME_DIR}\\"//g' /usr/bin/btrfs-assistant-l
 ### DXVK
 curl "https://raw.githubusercontent.com/doitsujin/dxvk/3a4c6fa3cb1548d56a90a38dd8f526b6c13e63fd/dxvk.conf" \
     -Lo /etc/dxvk-example.conf
+
+
+### bees
+rsync -Rr system_files/desktop/shared/./etc/systemd/system/beesd@.service.d/override.conf \
+          system_files/desktop/shared/./usr/lib/systemd/system/beesd@.timer \
+          system_files/desktop/shared/./usr/share/ublue-os/just/82-bazzite-beesd.just \
+          /
+sed -i 's/\[group("system")\]/\[group("System")\]/g' /usr/share/ublue-os/just/82-bazzite-beesd.just
+echo "import? \"/usr/share/ublue-os/just/82-bazzite-beesd.just\"" >> /usr/share/ublue-os/just/00-entry.just
 
 ### Waydroid
 curl "https://raw.githubusercontent.com/ublue-os/waydroid-scripts/main/waydroid-choose-gpu.sh" \
