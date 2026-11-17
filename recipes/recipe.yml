@@ -133,6 +133,8 @@ modules:
         - btrfsmaintenance
         - nohang-nightly
         - zswap-cli
+        - v4l-utils
+        - qv4l2
 
         - gamescope
         - scopebuddy
