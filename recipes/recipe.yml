@@ -93,7 +93,7 @@ modules:
       skip-broken: true
       packages:
         - python-proton-vpn-cli
-      # - proton-vpn-qt-app
+        - proton-vpn-qt-app
 
   - type: dnf
     repos:
